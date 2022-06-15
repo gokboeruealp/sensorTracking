@@ -1,0 +1,17 @@
+.boundary {
+  background-image: url('src/assets/img/blueprint.png');
+  height: 512px;
+  width: 512px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: relative;
+}
+
+.button-row button {
+  margin-right: 8px;
+  margin-top: 8px;
+  background-color: rgb(100, 200, 200);
+}

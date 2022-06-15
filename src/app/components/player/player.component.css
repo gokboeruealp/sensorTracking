@@ -1,0 +1,13 @@
+.player {
+    height: 15px;
+    width: 15px;
+    fill: rgb(35, 230, 220);
+    stroke-width: 2;
+    stroke: rgb(66, 65, 65);
+
+    position: absolute;
+}
+
+.button {
+    position: absolute;
+}
