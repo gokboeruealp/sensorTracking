@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as d3 from 'd3'
 @Component({
   selector: 'app-point',
   templateUrl: './point.component.html',
@@ -7,22 +8,22 @@ import { Component, OnInit } from '@angular/core';
 export class PointComponent implements OnInit {
   constructor() { }
 
+  selfComp!: PointComponent;
+
   dragPosition = { x: 0, y: 0 };
-  ngOnInit(): void {
+
+  ngAfterViewInit() {
+    this.selfComp = this;
+    this.setPointComponent(this);
   }
 
-  setPosition(dragPosition: { x: number, y: number }): void {
-    this.dragPosition = dragPosition;
-  }
-  getPosition(e: MouseEvent) {
-    this.dragPosition = { x: e.x, y: e.y };
-    console.log(this.dragPosition);
-    
-    return this.dragPosition;
+  ngOnInit(): void {  }
+
+  clickPos(e: MouseEvent) {
+    console.log(this.selfComp);
   }
 
-  setBackground()
-  {
-
+  setPointComponent(point: PointComponent) {
+    console.log(document.getElementById("point")?.getElementsByTagName("[cdkDragFreeDragPosition]"));
   }
 }

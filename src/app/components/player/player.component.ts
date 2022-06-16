@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 
 import { select as d3Select } from 'd3-selection';
 import { transition as d3Transition } from 'd3-transition';
+import { PointComponent } from '../point/point.component';
 d3Select.prototype.transition = d3Transition;
 @Component({
   selector: 'app-player',
@@ -13,8 +14,7 @@ d3Select.prototype.transition = d3Transition;
 export class PlayerComponent implements OnInit {
 
   public position!: { x: number, y: number };
-
-  duration: number = 100;
+  duration: number = 1000;
   paths: { axis: string, value: number }[] =
     [
       { axis: 'y', value: -150 },
@@ -44,13 +44,19 @@ export class PlayerComponent implements OnInit {
       { axis: 'y', value: 0 },
     ];
 
-  canPlay: boolean = true;
 
-
-  constructor() { }
+  constructor(private elem: ElementRef) { }
 
   ngOnInit(): void {
     this.position = { x: 245, y: 450 }
+  }
+  ngDoCheck() { //everyframe
+    console.log(this.elem.nativeElement.querySelectorAll("#point"));
+
+    document.querySelectorAll("#point").forEach(point => {
+      console.log(point);
+
+    });
   }
 
   getPlayerPosition(e: MouseEvent): any {
@@ -58,7 +64,7 @@ export class PlayerComponent implements OnInit {
     return { x: e.x, y: e.y };
   }
 
-  public play() {
+  play() {
     this.position = { x: 245, y: 450 }
     var player = d3.select("#player");
     player
@@ -114,9 +120,7 @@ export class PlayerComponent implements OnInit {
       .attr(this.paths[24].axis, this.paths[24].value)
       .transition().duration(this.duration);
 
-      this.position = { x: 245, y: 450 };
+    this.position = { x: 245, y: 450 };
   }
-
-  
 }
 
