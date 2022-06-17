@@ -52,23 +52,48 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     this.position = { x: 245, y: 450 }
   }
+
+  coords: {sensorCoord: {x: number, y: number}, playerCoord: {x: number, y: number}} = {sensorCoord: {x: 0, y: 0}, playerCoord: {x: 0, y: 0}};
   ngDoCheck() { //everyframe
-    document.querySelectorAll("#sensor").forEach(point => {
+    document.querySelectorAll(".sensor").forEach(point => {
       this.pointCoord = new Set();
       var style = window.getComputedStyle(point);
       var matrix = new WebKitCSSMatrix(style.webkitTransform);
-      //style.setProperty("background", "rgb(0,0,0)");
 
       const translateX = matrix.m41;
       const translateY = matrix.m42;
       //this.pointCoord.add({ point: point, x: translateX, y: translateY });
 
-            
+      //console.log("sensor: " + point + translateX + " - " + translateY);
+      this.coords.sensorCoord.x = translateX;
+      this.coords.sensorCoord.y = translateY;
     });
+    document.querySelectorAll(".player").forEach(player => {
+      var pStyle = window.getComputedStyle(player);
+      var pMatrix = new WebKitCSSMatrix(pStyle.webkitTransform);
+
+      const pTranslateX = pMatrix.m41 - 256;
+      const pTranslateY = pMatrix.m42 - 550;
+      
+      //console.log("player: " + player + pTranslateX + " - " + pTranslateY);
+      this.coords.playerCoord.x = pTranslateX;
+      this.coords.playerCoord.y = pTranslateY;
+    });
+    var distance = Math.sqrt(Math.pow(this.coords.playerCoord.x - this.coords.sensorCoord.x, 2) + Math.pow(this.coords.playerCoord.y - this.coords.sensorCoord.y, 2));
+    
+    console.log(distance);
+    
+    if (distance < 105) {
+      d3.selectAll(".sensor").style("background", "red")
+    }
+    else
+    {
+      d3.selectAll(".sensor").style("background", "white")
+    }
   }
 
   getPlayerPosition(e: MouseEvent): any {
-    console.log(e.x + " " + e.y);
+    //console.log(e.x + " " + e.y);
     return { x: e.x, y: e.y };
   }
 
@@ -77,7 +102,7 @@ export class PlayerComponent implements OnInit {
     var player = d3.select("#player");
     player
       .transition().duration(this.duration)
-      .attr(this.paths[0].axis, this.paths[0].value)
+      .attr(this.paths[0].axis, this.paths[0].value).attr("transform", "0,0,0")
       .transition().duration(this.duration)
       .attr(this.paths[1].axis, this.paths[1].value)
       .transition().duration(this.duration)

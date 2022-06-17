@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as d3 from 'd3'
+import * as d3 from 'd3';
+import * as drag from 'd3-drag'
+
 @Component({
   selector: 'app-point',
   templateUrl: './point.component.html',
@@ -14,16 +16,10 @@ export class PointComponent implements OnInit {
     this.selfComp = this;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   clickPos(e: MouseEvent) {
-    console.log(this.selfComp);
+    //console.log(this.selfComp);
   }
-
-  onDrag() {
-    console.log(d3.pointer(event)[1]);
-  }
-
-
 }
-
