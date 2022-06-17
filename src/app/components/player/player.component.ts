@@ -4,7 +4,6 @@ import * as d3 from 'd3-selection';
 
 import { select as d3Select } from 'd3-selection';
 import { transition as d3Transition } from 'd3-transition';
-import { PointComponent } from '../point/point.component';
 d3Select.prototype.transition = d3Transition;
 @Component({
   selector: 'app-player',
@@ -13,8 +12,11 @@ d3Select.prototype.transition = d3Transition;
 })
 export class PlayerComponent implements OnInit {
 
-  public position!: { x: number, y: number };
-  duration: number = 1000;
+  position!: { x: number, y: number };
+  duration: number = 250;
+
+  //pointCoord: {point: any, x: number, y: number}[] = []
+  pointCoord = new Set();
   paths: { axis: string, value: number }[] =
     [
       { axis: 'y', value: -150 },
@@ -51,11 +53,17 @@ export class PlayerComponent implements OnInit {
     this.position = { x: 245, y: 450 }
   }
   ngDoCheck() { //everyframe
-    console.log(this.elem.nativeElement.querySelectorAll("#point"));
+    document.querySelectorAll("#sensor").forEach(point => {
+      this.pointCoord = new Set();
+      var style = window.getComputedStyle(point);
+      var matrix = new WebKitCSSMatrix(style.webkitTransform);
+      //style.setProperty("background", "rgb(0,0,0)");
 
-    document.querySelectorAll("#point").forEach(point => {
-      console.log(point);
+      const translateX = matrix.m41;
+      const translateY = matrix.m42;
+      //this.pointCoord.add({ point: point, x: translateX, y: translateY });
 
+            
     });
   }
 
@@ -119,8 +127,6 @@ export class PlayerComponent implements OnInit {
       .transition().duration(this.duration)
       .attr(this.paths[24].axis, this.paths[24].value)
       .transition().duration(this.duration);
-
-    this.position = { x: 245, y: 450 };
   }
 }
 

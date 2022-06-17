@@ -10,20 +10,20 @@ export class PointComponent implements OnInit {
 
   selfComp!: PointComponent;
 
-  dragPosition = { x: 0, y: 0 };
-
   ngAfterViewInit() {
     this.selfComp = this;
-    this.setPointComponent(this);
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   clickPos(e: MouseEvent) {
     console.log(this.selfComp);
   }
 
-  setPointComponent(point: PointComponent) {
-    console.log(document.getElementById("point")?.getElementsByTagName("[cdkDragFreeDragPosition]"));
+  onDrag() {
+    console.log(d3.pointer(event)[1]);
   }
+
+
 }
+
