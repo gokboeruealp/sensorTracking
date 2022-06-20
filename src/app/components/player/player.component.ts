@@ -15,8 +15,7 @@ export class PlayerComponent implements OnInit {
   position!: { x: number, y: number };
   duration: number = 250;
 
-  //pointCoord: {point: any, x: number, y: number}[] = []
-  pointCoord = new Set();
+  sensorCoords: { sensor: any, x: number, y: number }[] = [];
   paths: { axis: string, value: number }[] =
     [
       { axis: 'y', value: -150 },
@@ -46,63 +45,53 @@ export class PlayerComponent implements OnInit {
       { axis: 'y', value: 0 },
     ];
 
+  translateX!: number; translateY!: number; pTranslateX!: number; pTranslateY!: number;
+
 
   constructor(private elem: ElementRef) { }
 
   ngOnInit(): void {
-    this.position = { x: 245, y: 450 }
+    this.position = { x: 245, y: 450 };
+    this.sensorCoords.push({ sensor: null, x: 0, y: 0 });
   }
-
-  coords: {sensorCoord: {x: number, y: number}, playerCoord: {x: number, y: number}} = {sensorCoord: {x: 0, y: 0}, playerCoord: {x: 0, y: 0}};
   ngDoCheck() { //everyframe
-    document.querySelectorAll(".sensor").forEach(point => {
-      this.pointCoord = new Set();
-      var style = window.getComputedStyle(point);
-      var matrix = new WebKitCSSMatrix(style.webkitTransform);
 
-      const translateX = matrix.m41;
-      const translateY = matrix.m42;
-      //this.pointCoord.add({ point: point, x: translateX, y: translateY });
-
-      //console.log("sensor: " + point + translateX + " - " + translateY);
-      this.coords.sensorCoord.x = translateX;
-      this.coords.sensorCoord.y = translateY;
-    });
+    d3.select(".circle").transition().duration(1000);
     document.querySelectorAll(".player").forEach(player => {
       var pStyle = window.getComputedStyle(player);
       var pMatrix = new WebKitCSSMatrix(pStyle.webkitTransform);
 
-      const pTranslateX = pMatrix.m41 - 256;
-      const pTranslateY = pMatrix.m42 - 550;
-      
-      //console.log("player: " + player + pTranslateX + " - " + pTranslateY);
-      this.coords.playerCoord.x = pTranslateX;
-      this.coords.playerCoord.y = pTranslateY;
+      this.pTranslateX = pMatrix.m41 - 256;
+      this.pTranslateY = pMatrix.m42 - 550;
     });
-    var distance = Math.sqrt(Math.pow(this.coords.playerCoord.x - this.coords.sensorCoord.x, 2) + Math.pow(this.coords.playerCoord.y - this.coords.sensorCoord.y, 2));
-    
-    console.log(distance);
-    
-    if (distance < 105) {
-      d3.selectAll(".sensor").style("background", "red")
-    }
-    else
-    {
-      d3.selectAll(".sensor").style("background", "white")
-    }
+    document.querySelectorAll(".sensor").forEach(sensor => {
+      var style = window.getComputedStyle(sensor);
+      var matrix = new WebKitCSSMatrix(style.webkitTransform);
+
+      this.translateX = matrix.m41;
+      this.translateY = matrix.m42;
+
+      var distance = Math.sqrt(Math.pow(this.pTranslateX - this.translateX, 2) + Math.pow(this.pTranslateY - this.translateY, 2))
+      if (distance < 100) {
+        d3.select(sensor).style("background", "red");
+      }
+      else {
+        d3.select(sensor).style("background", "white");
+      }
+    });
   }
 
   getPlayerPosition(e: MouseEvent): any {
-    //console.log(e.x + " " + e.y);
     return { x: e.x, y: e.y };
   }
 
   play() {
     this.position = { x: 245, y: 450 }
+    var x = 0;
     var player = d3.select("#player");
     player
       .transition().duration(this.duration)
-      .attr(this.paths[0].axis, this.paths[0].value).attr("transform", "0,0,0")
+      .attr(this.paths[0].axis, this.paths[0].value)
       .transition().duration(this.duration)
       .attr(this.paths[1].axis, this.paths[1].value)
       .transition().duration(this.duration)
@@ -152,6 +141,24 @@ export class PlayerComponent implements OnInit {
       .transition().duration(this.duration)
       .attr(this.paths[24].axis, this.paths[24].value)
       .transition().duration(this.duration);
+  }
+  setTransform() {
+    this.pTranslateX = this.getPlayerPos()[0];
+    this.pTranslateY = this.getPlayerPos()[1];
+  }
+
+  getPlayerPos(): number[] {
+    var x: number = 0, y: number = 0;
+    document.querySelectorAll(".player").forEach(player => {
+      var pStyle = window.getComputedStyle(player);
+      var pMatrix = new WebKitCSSMatrix(pStyle.webkitTransform);
+
+      x = pMatrix.m41;
+      y = pMatrix.m42;
+    });
+    console.log(x + " " + y);
+
+    return [x, y];
   }
 }
 
