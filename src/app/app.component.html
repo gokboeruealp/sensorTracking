@@ -1,10 +1,11 @@
 <div class="boundary">
   <app-player></app-player>
-  <div *ngFor="let point of points; let i = index" style="margin-left: 256px;">
-    <app-point></app-point>
+  <div *ngFor="let point of pointsFor" style="margin-left: 256px;">
+    <app-sensor></app-sensor>
   </div>
 </div>
 <br>
-<div class="button-row">
-  <button (click)="generateNewPoint()">New Point</button>
+<div>
+  <button color="warn" (click)="generateNewPoint()">New Point</button>
 </div>
+

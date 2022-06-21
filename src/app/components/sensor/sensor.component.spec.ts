@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PointComponent } from './point.component';
+import { SensorComponent } from './sensor.component';
 
 describe('PointComponent', () => {
-  let component: PointComponent;
-  let fixture: ComponentFixture<PointComponent>;
+  let component: SensorComponent;
+  let fixture: ComponentFixture<SensorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PointComponent ]
+      declarations: [ SensorComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PointComponent);
+    fixture = TestBed.createComponent(SensorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

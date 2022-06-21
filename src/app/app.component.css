@@ -10,7 +10,7 @@
   position: relative;
 }
 
-.button-row button {
+button {
   margin-right: 8px;
   margin-top: 8px;
   background-color: rgb(100, 200, 200);

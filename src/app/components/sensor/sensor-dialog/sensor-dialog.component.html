@@ -1,0 +1,19 @@
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Sensör Tipi</mat-label>
+    <mat-select>
+      <mat-option value="a">A Sensör</mat-option>
+      <mat-option value="b">B Sensör</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+  <button mat-raised-button (click)="closeDialog()">Çıkış Yap</button>
+  <button mat-raised-button (click)="saveSensor()">Kaydet</button>
+</div>

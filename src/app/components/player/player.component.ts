@@ -19,11 +19,10 @@ export class PlayerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
     var player = d3.select("#player");
     player.style("transform", "translate3d(245px, 450px, 0px)");
   }
-  ngDoCheck() { //everyframe
+  ngDoCheck() {
     document.querySelectorAll(".player").forEach(player => {
       var pStyle = window.getComputedStyle(player);
       var pMatrix = new WebKitCSSMatrix(pStyle.webkitTransform);
@@ -45,13 +44,8 @@ export class PlayerComponent implements OnInit {
       else {
         d3.select(sensor).style("background", "rgb(30, 125, 75)");
       }
-    });
+    });    
   }
-
-  getPlayerPosition(e: MouseEvent): any {
-    return { x: e.x, y: e.y };
-  }
-
   play() {
     var player = d3.select("#player");
     player.transition().duration(this.duration)
