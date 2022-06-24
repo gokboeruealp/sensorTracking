@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SensorComponent } from './components/sensor/sensor.component';
-
+import { SENSORS } from './mock-sensors';
+import { Sensor, sensorType } from './Sensor';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,12 +9,11 @@ import { SensorComponent } from './components/sensor/sensor.component';
 export class AppComponent {
   title = "Border Sec.";
 
-  pointsFor: string[] = [];
+  points: Sensor[] = SENSORS;
   ngOnInit() {
-
   }
 
   generateNewPoint() {
-    this.pointsFor.push(this.pointsFor.length.toString());
+    //this.points.push(new Sensor({id: 2, name: "a", type: sensorType.aType, transform: "sdf"}));
   }
 }

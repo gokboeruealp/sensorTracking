@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SensorComponent } from './components/sensor/sensor.component';
@@ -8,6 +8,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PlayerComponent } from './components/player/player.component';
 import { SensorDialogComponent } from './components/sensor/sensor-dialog/sensor-dialog.component';
 
+import { SENSORS } from 'src/app/mock-sensors';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,6 +41,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SensorListItemComponent } from './components/sensor/sensor-list-item/sensor-list-item.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     SensorComponent,
     PlayerComponent,
     SensorDialogComponent,
+    SensorListItemComponent
   ],
   imports: [
     BrowserModule,

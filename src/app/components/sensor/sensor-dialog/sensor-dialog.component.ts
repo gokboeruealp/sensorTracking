@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import { Sensor } from 'src/app/Sensor';
+import { SensorComponent } from '../sensor.component';
 @Component({
   selector: 'app-sensor-dialog',
   templateUrl: './sensor-dialog.component.html',
@@ -8,23 +10,19 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class SensorDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<SensorDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<SensorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: SensorComponent) { }
 
-  DialogTitle: string = "Sensor";
   ngOnInit(): void {
-
+    //console.log("id = " + this.data.id + " name = " + this.data.name + " type = " + this.data.type + " transform = " + this.data.transform);
   }
-
-  onDialogClosed() {
-    console.log("dialog opened!");
-  }
-  closeDialog()
-  {
+  public closeDialog() {
     this.dialogRef.close();
   }
-  saveSensor()
-  {
-    console.log("kaydet");
+  public saveSensor() {
+    this.dialogRef.close();
+  }
+  public deleteSensor() {
+    console.log(this.data.sensors);
     this.dialogRef.close();
   }
 }
