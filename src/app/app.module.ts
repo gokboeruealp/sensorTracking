@@ -41,15 +41,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { SensorListItemComponent } from './components/sensor/sensor-list-item/sensor-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SensorComponent,
     PlayerComponent,
-    SensorDialogComponent,
-    SensorListItemComponent
+    SensorDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,29 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SensorDialogComponent } from './sensor-dialog/sensor-dialog.component';
 
-import { Sensor } from '../../Sensor'
-import { SENSORS } from 'src/app/mock-sensors';
+import { SensorDialogComponent } from './sensor-dialog/sensor-dialog.component';
 @Component({
   selector: 'app-sensor',
   templateUrl: './sensor.component.html',
   styleUrls: ['./sensor.component.css'],
 })
 export class SensorComponent implements OnInit {
-
   constructor(private matDialog: MatDialog) { }
 
-  sensors: Sensor[] = SENSORS;
+  public selectedSensor: any;
+  id!: number;
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  onDoubleClick(e: MouseEvent) {
+    this.selectedSensor = e.target;
+    this.openDialog();
   }
 
-  onDoubleClick() {
+  openDialog() {
     const dialogRef = this.matDialog.open(SensorDialogComponent,
       {
-        width: '350px',
-        height: '350px',
-        data: { sensors: this.sensors }
+        width: '300px',
+        height: '300px',
+        data: { id: this.id, node: this.selectedSensor, name: "" }
       });
     dialogRef.disableClose = true;
   }

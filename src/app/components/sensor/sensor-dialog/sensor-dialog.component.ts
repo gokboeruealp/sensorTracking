@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Sensor } from 'src/app/Sensor';
-import { SensorComponent } from '../sensor.component';
+import { SENSORS } from 'src/app/mock-sensors';
 @Component({
   selector: 'app-sensor-dialog',
   templateUrl: './sensor-dialog.component.html',
@@ -10,19 +9,31 @@ import { SensorComponent } from '../sensor.component';
 })
 export class SensorDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<SensorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: SensorComponent) { }
+  constructor(public dialogRef: MatDialogRef<SensorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ngOnInit(): void {
-    //console.log("id = " + this.data.id + " name = " + this.data.name + " type = " + this.data.type + " transform = " + this.data.transform);
+  sensors = SENSORS;
+  ngOnInit(): void { this.openDialog(); }
+
+  openDialog()
+  {
+    console.log(this.data);
+    
   }
   public closeDialog() {
     this.dialogRef.close();
   }
   public saveSensor() {
     this.dialogRef.close();
+    this.generateNewPoint();
   }
   public deleteSensor() {
-    console.log(this.data.sensors);
+    this.data.node.remove();
+    console.log(this.data.id)
     this.dialogRef.close();
+  }
+
+  generateNewPoint() {
+    SENSORS.push({ id: SENSORS.length + 1, name: "", transform: "transform: translate3d(0px, 0px, 0px)" });
+    
   }
 }

@@ -8,15 +8,7 @@
     <mat-label>Sensör İsmi</mat-label>
     <input matInput placeholder="Sensör İsmi" id="sensor-name-input">
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Sensör Tipi</mat-label>
-    <mat-select>
-      <mat-option value="a">A Sensör</mat-option>
-      <mat-option value="b">B Sensör</mat-option>
-    </mat-select>
-  </mat-form-field>
   <div>
-    <!--<button mat-raised-button (click)="closeDialog()">İptal</button>-->
     <button mat-raised-button (click)="deleteSensor()">Sil</button>
     <button mat-raised-button (click)="saveSensor()">Kaydet</button>
   </div>

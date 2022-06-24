@@ -1,7 +1,7 @@
 <div class="boundary">
   <app-player></app-player>
-  <div *ngFor="let point of points" style="margin-left: 256px;">
-    <app-sensor></app-sensor>
+  <div *ngFor="let point of sensors" style="margin-left: 256px;">
+    <app-sensor>{{ point }}</app-sensor>
   </div>
 </div>
 <br>
@@ -13,12 +13,9 @@
 <br>
 <br>
 <br>
-<div *ngFor="let point of points">
+<div *ngFor="let point of sensors">
   <mat-card>
-    <h3>{{ point.id }} </h3>
-    <h3>{{ point.name }}</h3>
-    <h3>{{ point.type }}</h3>
-    <h3>{{ point.transform }}</h3>
+    id = {{ point.id }},  name = {{ point.name }}, transform = {{ point.transform }}
   </mat-card>
   <br>
 </div>

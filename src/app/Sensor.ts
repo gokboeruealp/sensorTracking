@@ -1,7 +1,7 @@
 export interface Sensor {
     id?: number;
     name: string;
-    type: sensorType;
+    //type: sensorType;
     transform: string;
   }
 
