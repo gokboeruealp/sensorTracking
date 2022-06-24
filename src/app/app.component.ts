@@ -1,9 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { SENSORS } from './mock-sensors';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SensorDialogComponent } from './components/sensor/sensor-dialog/sensor-dialog.component';
-import { SensorComponent } from './components/sensor/sensor.component';
+import { MatDialog } from '@angular/material/dialog';
+import { NewSensorDialogComponent } from './components/sensor/new-sensor-dialog/new-sensor-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +16,7 @@ export class AppComponent {
   ngOnInit() { }
 
   generateNewPoint() {
-    var sensor: SensorComponent;
-    const dialogRef = this.matDialog.open(SensorDialogComponent,
+    const dialogRef = this.matDialog.open(NewSensorDialogComponent,
       {
         width: '300px',
         height: '300px',

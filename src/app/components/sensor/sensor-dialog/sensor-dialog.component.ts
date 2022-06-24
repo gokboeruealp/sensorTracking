@@ -12,28 +12,16 @@ export class SensorDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<SensorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   sensors = SENSORS;
-  ngOnInit(): void { this.openDialog(); }
-
-  openDialog()
-  {
-    console.log(this.data);
-    
-  }
+  ngOnInit(): void { }
   public closeDialog() {
     this.dialogRef.close();
   }
   public saveSensor() {
     this.dialogRef.close();
-    this.generateNewPoint();
   }
   public deleteSensor() {
     this.data.node.remove();
     console.log(this.data.id)
     this.dialogRef.close();
-  }
-
-  generateNewPoint() {
-    SENSORS.push({ id: SENSORS.length + 1, name: "", transform: "transform: translate3d(0px, 0px, 0px)" });
-    
   }
 }
