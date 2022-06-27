@@ -6,10 +6,10 @@
   <br>
   <mat-form-field appearance="outline">
     <mat-label>Sensör İsmi</mat-label>
-    <input matInput placeholder="Sensör İsmi">
+    <input matInput placeholder="Sensör İsmi" [(ngModel)]="this.data.name">
   </mat-form-field>
   <div>
-    <button mat-raised-button (click)="giveUp()">Vazgeç</button>
+    <button mat-raised-button (click)="closeDialog()">Vazgeç</button>
     <button mat-raised-button (click)="newSensorButton()">Ekle</button>
   </div>
 </div>

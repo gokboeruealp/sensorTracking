@@ -1,21 +1,21 @@
 <div class="boundary">
   <app-player></app-player>
-  <div *ngFor="let point of sensors" style="margin-left: 256px;">
-    <app-sensor>{{ point }}</app-sensor>
+  <div *ngFor="let sensor of sensors" style="margin-left: 256px;">
+    <app-sensor>{{ sensor }}</app-sensor>
   </div>
 </div>
 <br>
 <br>
 <div>
-  <button mat-raised-button (click)="generateNewPoint()">Yeni Sensör</button>
+  <button mat-raised-button (click)="generateNewSensor()">Yeni Sensör</button>
 </div>
 
 <br>
 <br>
 <br>
-<div *ngFor="let point of sensors">
+<div *ngFor="let sensor of sensors">
   <mat-card>
-    id = {{ point.id }},  name = {{ point.name }}, transform = {{ point.transform }}
+    id = {{ sensor.id }},  name = {{ sensor.name }}, transform = {{ sensor.transform }}
   </mat-card>
   <br>
 </div>

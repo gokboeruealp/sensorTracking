@@ -3,6 +3,7 @@ import { SENSORS } from './mock-sensors';
 
 import { MatDialog } from '@angular/material/dialog';
 import { NewSensorDialogComponent } from './components/sensor/new-sensor-dialog/new-sensor-dialog.component';
+import { SensorComponent } from './components/sensor/sensor.component';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,12 @@ export class AppComponent {
   sensors = SENSORS;
   ngOnInit() { }
 
-  generateNewPoint() {
+  generateNewSensor() {
     const dialogRef = this.matDialog.open(NewSensorDialogComponent,
       {
         width: '300px',
         height: '300px',
-        data: { id: SENSORS.length + 1, node: null, name: "" }
+        data: { id: SENSORS.length + 1, name: "" }
       });
     dialogRef.disableClose = true;
   }

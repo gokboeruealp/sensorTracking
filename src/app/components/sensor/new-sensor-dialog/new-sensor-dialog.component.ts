@@ -10,7 +10,7 @@ import { SensorDialogComponent } from '../sensor-dialog/sensor-dialog.component'
 })
 export class NewSensorDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<SensorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<NewSensorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
   }
@@ -18,11 +18,12 @@ export class NewSensorDialogComponent implements OnInit {
   newSensorButton()
   {
     SENSORS.push({ id: SENSORS.length + 1, name: this.data.name, transform: "transform: translate3d(0px, 0px, 0px)" });
+    
     this.dialogRef.close();
   }
 
-  giveUp()
+  closeDialog()
   {
-
+    this.dialogRef.close();
   }
 }

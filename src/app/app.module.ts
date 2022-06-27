@@ -10,6 +10,8 @@ import { SensorDialogComponent } from './components/sensor/sensor-dialog/sensor-
 
 import { SENSORS } from 'src/app/mock-sensors';
 
+import { FormsModule } from '@angular/forms';
+
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -87,7 +89,8 @@ import { NewSensorDialogComponent } from './components/sensor/new-sensor-dialog/
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent],

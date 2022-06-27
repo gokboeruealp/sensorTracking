@@ -1,12 +1,12 @@
 <div class="center">
   <br>
   <div>
-    <mat-label>Sensör Adı</mat-label>
+    <mat-label>{{ name }}</mat-label>
   </div>
   <br>
   <mat-form-field appearance="outline">
     <mat-label>Sensör İsmi</mat-label>
-    <input matInput placeholder="Sensör İsmi">
+    <input matInput placeholder="{{ name }}">
   </mat-form-field>
   <div>
     <button mat-raised-button (click)="deleteSensor()">Sil</button>

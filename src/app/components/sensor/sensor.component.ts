@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { SENSORS } from 'src/app/mock-sensors';
 
 import { SensorDialogComponent } from './sensor-dialog/sensor-dialog.component';
 @Component({
@@ -10,22 +11,26 @@ import { SensorDialogComponent } from './sensor-dialog/sensor-dialog.component';
 export class SensorComponent implements OnInit {
   constructor(private matDialog: MatDialog) { }
 
-  public selectedSensor: any;
+  selectedSensorNode: any;
   id!: number;
 
   ngOnInit(): void { }
 
   onDoubleClick(e: MouseEvent) {
-    this.selectedSensor = e.target;
+    this.selectedSensorNode = e.target;
     this.openDialog();
   }
 
   openDialog() {
+    SENSORS.forEach(sensor =>
+      {
+        
+      })
     const dialogRef = this.matDialog.open(SensorDialogComponent,
       {
         width: '300px',
         height: '300px',
-        data: { id: this.id, node: this.selectedSensor, name: "" }
+        data: { id: this.id, node: this.selectedSensorNode, component: this, name: "" }
       });
     dialogRef.disableClose = true;
   }
