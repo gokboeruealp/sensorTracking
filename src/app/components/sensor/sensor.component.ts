@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, destroyPlatform, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SENSORS } from 'src/app/mock-sensors';
+import { Sensor } from 'src/app/Sensor';
 
 import { SensorDialogComponent } from './sensor-dialog/sensor-dialog.component';
 @Component({
@@ -11,8 +11,9 @@ import { SensorDialogComponent } from './sensor-dialog/sensor-dialog.component';
 export class SensorComponent implements OnInit {
   constructor(private matDialog: MatDialog) { }
 
+  public sensor!: Sensor;
+
   selectedSensorNode: any;
-  id!: number;
 
   ngOnInit(): void { }
 
@@ -22,15 +23,11 @@ export class SensorComponent implements OnInit {
   }
 
   openDialog() {
-    SENSORS.forEach(sensor =>
-      {
-        
-      })
     const dialogRef = this.matDialog.open(SensorDialogComponent,
       {
         width: '300px',
         height: '300px',
-        data: { id: this.id, node: this.selectedSensorNode, component: this, name: "" }
+        data: { sensor: this.sensor, node: this.selectedSensorNode }
       });
     dialogRef.disableClose = true;
   }

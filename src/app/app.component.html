@@ -1,7 +1,7 @@
 <div class="boundary">
   <app-player></app-player>
-  <div *ngFor="let sensor of sensors" style="margin-left: 256px;">
-    <app-sensor>{{ sensor }}</app-sensor>
+  <div *ngFor="let sensor of mock_sensors; let i = index" style="margin-left: 256px;">
+    <app-sensor #sensor>{{ sensor }}</app-sensor>
   </div>
 </div>
 <br>
@@ -9,13 +9,6 @@
 <div>
   <button mat-raised-button (click)="generateNewSensor()">Yeni Sensör</button>
 </div>
-
-<br>
-<br>
-<br>
-<div *ngFor="let sensor of sensors">
-  <mat-card>
-    id = {{ sensor.id }},  name = {{ sensor.name }}, transform = {{ sensor.transform }}
-  </mat-card>
-  <br>
+<div>
+  <button mat-raised-button (click)="updateFunction()">Update</button>
 </div>

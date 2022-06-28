@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChildren } from '@angular/core';
 import { SENSORS } from './mock-sensors';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -12,17 +12,35 @@ import { SensorComponent } from './components/sensor/sensor.component';
 })
 export class AppComponent {
   constructor(private matDialog: MatDialog) { }
+
+  @ViewChildren('sensor') sensors: SensorComponent[] = [];
+
   title = "Border Sec.";
-  sensors = SENSORS;
-  ngOnInit() { }
+  mock_sensors = SENSORS;
+  ngOnInit() {
+
+  }
 
   generateNewSensor() {
     const dialogRef = this.matDialog.open(NewSensorDialogComponent,
       {
         width: '300px',
         height: '300px',
-        data: { id: SENSORS.length + 1, name: "" }
+        data: { sensors: this.sensors }
       });
+      dialogRef.afterOpened().subscribe(() => {
+        console.log("new sensor dialog opened");
+      });
+      dialogRef.afterClosed().subscribe(() => 
+      {
+        console.log("new sensor dialog closed");
+      });
+
     dialogRef.disableClose = true;
+  }
+  updateFunction() {
+    this.sensors.forEach(sensorComponent => {
+      console.log(sensorComponent.sensor);
+    });
   }
 }
